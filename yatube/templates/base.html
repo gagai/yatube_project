@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    {% block head_settings %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" {% static "img/fav/favicon.ico" %} type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" {% static "img/fav/apple-touch-icon.png" %}>
+    <link rel="icon" type="image/png" sizes="32x32" {% static "img/fav/favicon-32x32.png" %}>
+    <link rel="icon" type="image/png" sizes="16x16" {% static "img/fav/favicon-16x16.png" %}>
+    <meta name="msapplication-TileColor" content="#000">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    {% endblock head_settings %}
+    <title> {% block title %} Здесь должен быть заголовок {% endblock %} </title>
+  </head>
+  <body>
+
+    <header>
+      {% include 'includes/header.html' %}
+    </header>
+
+    <main>
+      <div class="container py-5">     
+        <h1>{% block main_page_title %} Заголовок страницы {% endblock %}</h1>
+        <p>
+          {% block main_page_subtitle %} Подзаголовок страницы {% endblock %}
+        </p>
+      <div class="container py-5">
+
+        {% block content %}
+          Здесь был контент
+        {% endblock content %}
+
+      </div>
+      </div>
+    </main>
+
+    <footer>
+      {%include 'includes/footer.html'%}
+    </footer>
+  </body>
