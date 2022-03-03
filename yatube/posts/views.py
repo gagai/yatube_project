@@ -151,7 +151,8 @@ def follow_index(request):
     maps = Follow.objects.filter(user=follower)
     post_list = []
     for map in maps:
-        post_list = Post.objects.filter(author=map.author)
+        print(f'{map}')
+        post_list += Post.objects.filter(author=map.author)
     page_obj = get_page_obj(request, post_list, POSTS_PER_PAGE)
     title = 'Избранные авторы'
     description = ''
