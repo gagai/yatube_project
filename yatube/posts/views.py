@@ -14,9 +14,9 @@ ordering_post_default = '-pub_date'
 
 @cache_page(20)
 def index(request):
-    post_list = (
-        Post.objects.select_related('group').all().order_by(ordering_post_default)
-    )
+    post_list = (Post.objects.select_related('group').all().
+                 order_by(ordering_post_default)
+                 )
     page_obj = get_page_obj(request, post_list, POSTS_PER_PAGE)
     template = 'posts/index.html'
     title = 'Последние обновления на сайте'
@@ -150,10 +150,8 @@ def add_comment(request, post_id):
 
 @login_required
 def follow_index(request):
-    maps = request.user.follower.all()
-    post_list = []
-    for map in maps:
-        post_list += Post.objects.filter(author=map.author)
+    authors = request.user.follower.all().values('author')
+    post_list = Post.objects.filter(author__in=authors)
     page_obj = get_page_obj(request, post_list, POSTS_PER_PAGE)
     title = 'Избранные авторы'
     description = ''
