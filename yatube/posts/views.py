@@ -14,7 +14,9 @@ ordering_post_default = '-pub_date'
 
 @cache_page(20)
 def index(request):
-    post_list = Post.objects.select_related('group').all().order_by(ordering_post_default)
+    post_list = (
+        Post.objects.select_related('group').all().order_by(ordering_post_default)
+    )
     page_obj = get_page_obj(request, post_list, POSTS_PER_PAGE)
     template = 'posts/index.html'
     title = 'Последние обновления на сайте'

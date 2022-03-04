@@ -451,4 +451,6 @@ class PageCachingTests(TestCase):
         content_after_cache_is_cleared = self.client.get(
             reverse('posts:index')
         ).content
-        self.assertNotEqual(content_after_delete, content_after_cache_is_cleared)
+        self.assertNotEqual(content_after_delete,
+                            content_after_cache_is_cleared
+                            )
