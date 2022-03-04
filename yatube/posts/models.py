@@ -31,7 +31,7 @@ class Post(models.Model):
         blank=True
     )
 
-    class Meta():
+    class Meta:
         ordering = ('-pub_date',)
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
@@ -55,7 +55,7 @@ class Group(models.Model):
                                    help_text='О чем эта группа?'
                                    )
 
-    class Meta():
+    class Meta:
         ordering = ('title',)
         verbose_name = 'Группа'
         verbose_name_plural = 'Группы'
@@ -84,7 +84,7 @@ class Comment(models.Model):
                             max_length=280
                             )
 
-    class Meta():
+    class Meta:
         ordering = ('-created',)
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
@@ -101,7 +101,12 @@ class Follow(models.Model):
                                verbose_name='Автор',
                                on_delete=models.CASCADE,)
 
-    class Meta():
+    class Meta:
         ordering = ('user',)
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'author'],
+                                    name='unique_follow'
+                                    )
+        ]

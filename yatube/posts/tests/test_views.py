@@ -89,7 +89,7 @@ class PostsPageTests(TestCase):
             with self.subTest(value=value):
                 self.assertEqual(value, expected)
 
-    def test_authorized_client_follows_and_unfollows_users(self):
+    def test_authorized_client_follows_users(self):
         author = self.author
         user = self.user
 
@@ -106,6 +106,11 @@ class PostsPageTests(TestCase):
         self.assertEqual(Follow.objects.all().count(), follow_count + 1)
         self.assertTrue(map_exists)
 
+    def test_authorized_client_unfollows_users(self):
+        author = self.author
+        user = self.user
+
+        Follow.objects.create(author=author, user=user)
         self.authorized_client.get(
             reverse('posts:profile_unfollow',
                     kwargs={'username': author.username}
@@ -435,9 +440,15 @@ class PageCachingTests(TestCase):
 
     def test_index_page_is_caching(self):
         posts_count = Post.objects.all().count()
-        content_before_delete = Client().get(reverse('posts:index')).content
+        content_before_delete = self.client.get(reverse('posts:index')).content
         Post.objects.get(id=1).delete()
-        content_after_delete = Client().get(reverse('posts:index')).content
+        content_after_delete = self.client.get(reverse('posts:index')).content
 
         self.assertEqual(Post.objects.count(), posts_count - 1)
         self.assertEqual(content_before_delete, content_after_delete)
+
+        cache.clear()
+        content_after_cache_is_cleared = self.client.get(
+            reverse('posts:index')
+        ).content
+        self.assertNotEqual(content_after_delete, content_after_cache_is_cleared)
