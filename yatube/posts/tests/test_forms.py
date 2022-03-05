@@ -80,8 +80,6 @@ class PostCreateFormTests(TestCase):
         # Получили пост с id последнего созданного поста из БД и убедились,
         # что тот имеет те же данные, что использовались при создании поста
         self.assertTrue(Post.objects.filter(id=created_post.id,
-                                            text='post_text',
-                                            group=self.group_id,
                                             image='posts/small.gif'
                                             ).exists()
                         )
