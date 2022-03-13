@@ -1,20 +1,22 @@
 {% extends "base.html" %}
-{% block title %}Технологии{% endblock %}
+
+{% block title %} Технологии {% endblock %}
+
+{% block main_page_title %} Технологии {% endblock %}
+
+{% block main_page_subtitle %} <h2> Вот что я использовал при разработке: </h2>{% endblock %}
+
 {% block content %}
-<div class="row">
-  <h1>Вот что я умею</h1>
-  <aside class="col-12 col-md-3">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        Python
-      </li>
-      <li class="list-group-item">
-        Django
-      </li>
-    </ul>
-  </aside>
-  <article class="col-12 col-md-9">
-    <p>Текст страницы "Технологии"</p>
-  </article>
-</div>
-{% endblock %}
+
+<ul><h4> • Python </h4></ul>
+<ul><h4> • Django </h4></ul>
+<ul><h4> • Приложения: </h4></ul>
+<ul><h5> ⠀pillow - графическая библиотека для sorl </h5></ul>
+<ul><h5> ⠀django-debug-toolbar - для душевного равновесия </h5></ul>
+<ul><h5> ⠀sorl-thumbnail - для картинок </h5></ul>
+<ul><h5> ⠀pytest - для тестов </h5></ul>
+<ul><h5> ⠀Вискас - для котят </h5></ul>
+<ul><h5> ⠀Скайрим - для нордов </h5></ul>
+
+
+{% endblock content %}
