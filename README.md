@@ -1,3 +1,40 @@
-# hw05_final
+# Социальная сеть Yatube для публикации постов.
+##### Создавайте свои посты, просматривайте записи других пользователей в ленте
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+##### В проекте реализованы:
+ * подписки на пользователей
+ * группы для объединения постов по тематике
+ * поддержка изображений
+ * кэширование страниц
+ * проект работает без клиентской части: и логика, и рендеринг страниц написаны на Django
+
+##### Запуск проекта:
+Скопируйте репозиторий
+```
+git clone git@github.com:gagai/yatube_project.git
+```
+
+Перейдите в папку проекта, установите виртуальное окружение
+```
+cd yatube_project
+python3 -m venv venv
+```
+Активируйте виртуальное окружение и установите необходимые для работы плагины
+
+```
+. venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+Перейдите в папку с файлом manage.py, запустите и примените миграции, создайте суперпользователя и запустите проект
+```
+cd yatube/
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py createsuperuser
+python3 manage.py runserver
+```
+
+Готово!
+Проект можно открыть по адресу http://localhost/
+Управлять проектом можно по адресу http://localhost/admin/
